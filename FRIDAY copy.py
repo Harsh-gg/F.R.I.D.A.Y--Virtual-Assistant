@@ -1,9 +1,11 @@
 import pyttsx3
 import speech_recognition as sr
+import requests
+from decouple import config
 from datetime import datetime
 from random import choice
 from utils import opening_text
-from online_ops import find_my_ip,search_on_wikipedia,get_trending_movies,play_on_youtube,search_on_google,send_whatsapp_message,get_random_joke,get_random_advice
+from online_ops import find_my_ip, get_random_advice, get_random_joke, play_on_youtube, search_on_google, search_on_wikipedia, send_whatsapp_message
 from pprint import pprint
 import os
 import subprocess as sp
@@ -62,40 +64,20 @@ if __name__ == '__main__':
     while True:
         query = take_user_input().lower()
 
-        if 'open notepad' in query:
-            codepath="C:\\Program Files\\Notepad++\\notepad++.exe"
-            os.startfile(codepath)
 
-        elif 'open discord' in query:
-             codepath="C:\\Users\\gurna\\AppData\\Local\\Discord\\app-1.0.9011\\Discord.exe"
-             os.startfile(codepath)
 
-        elif 'open command prompt' in query or 'open cmd' in query:
-             os.system('start cmd')
-
-        elif 'open camera' in query:
-            sp.run('start microsoft.windows.camera:', shell=True)
-
-        elif 'open calculator' in query:
-             codepath="C:\Windows\System32\calc.exe"
-             os.startfile(codepath)
-        
-        elif 'open code editor' in query:
-             codepath="C:\\Users\\gurna\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
-             os.startfile(codepath)
-
-        elif "what is my ip address" in query:
+        elif "what's is ip address" in query:
             ip_address = find_my_ip()
             speak(f'Your IP Address is {ip_address}.\n For your convenience, I am printing it on the screen sir.')
             print(f'Your IP Address is {ip_address}')
 
-        # elif 'search on wikipedia' in query:
-        #     speak('What do you want to search on Wikipedia, sir?')
-        #     search_query = take_user_input().lower()
-        #     results = search_on_wikipedia(search_query)
-        #     speak(f"According to Wikipedia, {results}")
-        #     speak("For your convenience, I am printing it on the screen sir.")
-        #     print(results)
+        elif 'search on wikipedia' in query:
+            speak('What do you want to search on Wikipedia, sir?')
+            search_query = take_user_input().lower()
+            results = search_on_wikipedia(search_query)
+            speak(f"According to Wikipedia, {results}")
+            speak("For your convenience, I am printing it on the screen sir.")
+            print(results)
 
         elif 'play on youtube' in query:
             speak('What do you want to play on Youtube, sir?')
@@ -128,24 +110,3 @@ if __name__ == '__main__':
             speak(advice)
             speak("For your convenience, I am printing it on the screen sir.")
             pprint(advice)
-
-        # elif "suggest movies" in query:
-        #     speak(f"Some of the trending movies are: {get_trending_movies()}")
-        #     speak("For your convenience, I am printing it on the screen sir.")
-        #     print(*get_trending_movies(), sep='\n')
-
-        # elif "read today's news" in query:
-        #     speak(f"I'm reading out the latest news headlines, sir")
-        #     speak(get_latest_news())
-        #     speak("For your convenience, I am printing it on the screen sir.")
-        #     print(*get_latest_news(), sep='\n')
-
-        # elif "how's the weather" in query:
-        #     ip_address = find_my_ip()
-        #     city = requests.get(f"https://ipapi.co/{ip_address}/city/").text
-        #     speak(f"Getting weather report for your city {city}")
-        #     weather, temperature, feels_like = get_weather_report(city)
-        #     speak(f"The current temperature is {temperature}, but it feels like {feels_like}")
-        #     speak(f"Also, the weather report talks about {weather}")
-        #     speak("For your convenience, I am printing it on the screen sir.")
-        #     print(f"Description: {weather}\nTemperature: {temperature}\nFeels like: {feels_like}")
