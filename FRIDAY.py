@@ -3,10 +3,11 @@ import speech_recognition as sr
 from datetime import datetime
 from random import choice
 from utils import opening_text
-from online_ops import find_my_ip,search_on_wikipedia,get_trending_movies,play_on_youtube,search_on_google,send_whatsapp_message,get_random_joke,get_random_advice
+from online_ops import find_my_ip,search_on_wikipedia,get_trending_movies,play_on_youtube,search_on_google,send_whatsapp_message,get_random_joke,get_random_advice,get_latest_news
 from pprint import pprint
 import os
 import subprocess as sp
+import wikipedia
 
 
 
@@ -89,13 +90,13 @@ if __name__ == '__main__':
             speak(f'Your IP Address is {ip_address}.\n For your convenience, I am printing it on the screen sir.')
             print(f'Your IP Address is {ip_address}')
 
-        # elif 'search on wikipedia' in query:
-        #     speak('What do you want to search on Wikipedia, sir?')
-        #     search_query = take_user_input().lower()
-        #     results = search_on_wikipedia(search_query)
-        #     speak(f"According to Wikipedia, {results}")
-        #     speak("For your convenience, I am printing it on the screen sir.")
+        # elif 'wikipedia' in query:  #if wikipedia found in the query then this block will be executed
+        #     speak('Searching Wikipedia...')
+        #     query = query.replace("wikipedia", "")
+        #     results = wikipedia.summary(query, sentences=2, features="html.perser") 
+        #     speak("According to Wikipedia")
         #     print(results)
+        #     speak(results)
 
         elif 'play on youtube' in query:
             speak('What do you want to play on Youtube, sir?')
@@ -129,10 +130,10 @@ if __name__ == '__main__':
             speak("For your convenience, I am printing it on the screen sir.")
             pprint(advice)
 
-        # elif "suggest movies" in query:
-        #     speak(f"Some of the trending movies are: {get_trending_movies()}")
-        #     speak("For your convenience, I am printing it on the screen sir.")
-        #     print(*get_trending_movies(), sep='\n')
+        elif "suggest movies" in query:
+            speak(f"Some of the trending movies are: {get_trending_movies()}")
+            speak("For your convenience, I am printing it on the screen sir.")
+            print(*get_trending_movies(), sep='\n')
 
         # elif "read today's news" in query:
         #     speak(f"I'm reading out the latest news headlines, sir")

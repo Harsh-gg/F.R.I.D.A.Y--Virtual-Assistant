@@ -23,25 +23,25 @@ def search_on_google(query):
 def send_whatsapp_message(number, message):
     kit.sendwhatmsg_instantly(f"+91{number}", message)
 
-# TMDB_API_KEY = config('TMDB_API_KEY', cast=str)
-# def get_trending_movies():
-#     trending_movies = []
-#     res =requests.get(
-#         f"https://api.themoviedb.org/3/trending/movie/day?api_key={TMDB_API_KEY}").json()
-#     results = res["results"]
-#     for r in results:
-#         trending_movies.append(r["original_title"])
-#     return trending_movies[:5]
+TMDB_API_KEY = "7942de5daad4a4265814464fd71281a6"
+def get_trending_movies():
+    trending_movies = []
+    res =requests.get(
+        f"https://api.themoviedb.org/3/trending/movie/day?api_key={TMDB_API_KEY}").json()
+    results = res["results"]
+    for r in results:
+        trending_movies.append(r["original_title"])
+    return trending_movies[:5]
 
-# NEWS_API_KEY = config('NEWS_API_KEY', cast=str)
-# def get_latest_news():
-#     news_headlines = []
-#     res = requests.get(
-#         f"https://newsapi.org/v2/top-headlines?country=in&apiKey={os.environ['NEWS_API_KEY']}&category=general").json()
-#     articles = res["articles"]
-#     for article in articles:
-#         news_headlines.append(article["title"])
-#     return news_headlines[:5]
+NEWS_API_KEY = "2cd2411adc284493ad31ce01ad985728"
+def get_latest_news():
+    news_headlines = []
+    res = requests.get(
+        f"https://newsapi.org/v2/top-headlines?country=in&apiKey={'NEWS_API_KEY'}&category=general").json()
+    articles = res["articles"]
+    for article in articles:
+        news_headlines.append(article["title"])
+    return news_headlines[:5]
 
 def get_random_joke():
     headers = {
@@ -53,3 +53,13 @@ def get_random_joke():
 def get_random_advice():
     res = requests.get("https://api.adviceslip.com/advice").json()
     return res['slip']['advice']
+
+
+# OPENWEATHER_APP_ID = 
+# def get_weather_report(city):
+#     res = requests.get(
+#         f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_APP_ID}&units=metric").json()
+#     weather = res["weather"][0]["main"]
+#     temperature = res["main"]["temp"]
+#     feels_like = res["main"]["feels_like"]
+#     return weather, f"{temperature}℃", f"{feels_like}℃"
