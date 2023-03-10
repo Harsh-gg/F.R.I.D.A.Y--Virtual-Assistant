@@ -33,8 +33,9 @@ def get_trending_movies():
         trending_movies.append(r["original_title"])
     return trending_movies[:5]
 
-NEWS_API_KEY = "2cd2411adc284493ad31ce01ad985728"
+
 def get_latest_news():
+    NEWS_API_KEY = "2cd2411adc284493ad31ce01ad985728"
     news_headlines = []
     res = requests.get(
         f"https://newsapi.org/v2/top-headlines?country=in&apiKey={'NEWS_API_KEY'}&category=general").json()
@@ -55,11 +56,11 @@ def get_random_advice():
     return res['slip']['advice']
 
 
-# OPENWEATHER_APP_ID = 
-# def get_weather_report(city):
-#     res = requests.get(
-#         f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_APP_ID}&units=metric").json()
-#     weather = res["weather"][0]["main"]
-#     temperature = res["main"]["temp"]
-#     feels_like = res["main"]["feels_like"]
-#     return weather, f"{temperature}℃", f"{feels_like}℃"
+OPENWEATHER_APP_ID = "7bf65a84df3e8133bcf820c3de603add"
+def get_weather_report(city):
+    res = requests.get(
+        f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_APP_ID}&units=metric").json()
+    weather = res["weather"][0]["main"]
+    temperature = res["main"]["temp"]
+    feels_like = res["main"]["feels_like"]
+    return weather, f"{temperature}℃", f"{feels_like}℃"

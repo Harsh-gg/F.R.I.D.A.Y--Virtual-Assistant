@@ -3,10 +3,11 @@ import speech_recognition as sr
 from datetime import datetime
 from random import choice
 from utils import opening_text
-from online_ops import find_my_ip,search_on_wikipedia,get_trending_movies,play_on_youtube,search_on_google,send_whatsapp_message,get_random_joke,get_random_advice,get_latest_news
+from online_ops import find_my_ip,search_on_wikipedia,get_trending_movies,play_on_youtube,search_on_google,send_whatsapp_message,get_random_joke,get_random_advice,get_latest_news,get_weather_report
 from pprint import pprint
 import os
 import subprocess as sp
+import requests
 import wikipedia
 
 
@@ -135,18 +136,18 @@ if __name__ == '__main__':
             speak("For your convenience, I am printing it on the screen sir.")
             print(*get_trending_movies(), sep='\n')
 
-        # elif "read today's news" in query:
-        #     speak(f"I'm reading out the latest news headlines, sir")
-        #     speak(get_latest_news())
-        #     speak("For your convenience, I am printing it on the screen sir.")
-        #     print(*get_latest_news(), sep='\n')
+        elif "read today's news" in query:
+            speak(f"I'm reading out the latest news headlines, sir")
+            speak(get_latest_news())
+            speak("For your convenience, I am printing it on the screen sir.")
+            print(*get_latest_news(), sep='\n')
 
-        # elif "how's the weather" in query:
-        #     ip_address = find_my_ip()
-        #     city = requests.get(f"https://ipapi.co/{ip_address}/city/").text
-        #     speak(f"Getting weather report for your city {city}")
-        #     weather, temperature, feels_like = get_weather_report(city)
-        #     speak(f"The current temperature is {temperature}, but it feels like {feels_like}")
-        #     speak(f"Also, the weather report talks about {weather}")
-        #     speak("For your convenience, I am printing it on the screen sir.")
-        #     print(f"Description: {weather}\nTemperature: {temperature}\nFeels like: {feels_like}")
+        elif "how's the weather" in query:
+            ip_address = find_my_ip()
+            city = requests.get(f"https://ipapi.co/{ip_address}/city/").text
+            speak(f"Getting weather report for your city {city}")
+            weather, temperature, feels_like = get_weather_report(city)
+            speak(f"The current temperature is {temperature}, but it feels like {feels_like}")
+            speak(f"Also, the weather report talks about {weather}")
+            speak("For your convenience, I am printing it on the screen sir.")
+            print(f"Description: {weather}\nTemperature: {temperature}\nFeels like: {feels_like}")
