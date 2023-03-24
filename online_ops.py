@@ -1,5 +1,11 @@
 import requests
+import os
 import pywhatkit as kit
+from dotenv.main import load_dotenv
+
+load_dotenv()
+tmdb_api = os.environ['TMDB_API_KEY']
+weather_api = os.environ['OPENWEATHER_APP_ID']
 
 def find_my_ip():
     ip_address = requests.get('https://api64.ipify.org?format=json').json()
@@ -15,10 +21,10 @@ def send_whatsapp_message(number, message):
     kit.sendwhatmsg_instantly(f"+91{number}", message)
 
 def get_trending_movies():
-    TMDB_API_KEY = "7942de5daad4a4265814464fd71281a6"
+    #TMDB_API_KEY = "7942de5daad4a4265814464fd71281a6"
     trending_movies = []
     res =requests.get(
-        f"https://api.themoviedb.org/3/trending/movie/day?api_key={TMDB_API_KEY}").json()
+        f"https://api.themoviedb.org/3/trending/movie/day?api_key={tmdb_api}").json()
     results = res["results"]
     for r in results:
         trending_movies.append(r["original_title"])
@@ -36,9 +42,9 @@ def get_random_advice():
     return res['slip']['advice']
 
 def get_weather_report(city):
-    OPENWEATHER_APP_ID = "7bf65a84df3e8133bcf820c3de603add"
+    #OPENWEATHER_APP_ID = "7bf65a84df3e8133bcf820c3de603add"
     res = requests.get(
-        f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_APP_ID}&units=metric").json()
+        f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={weather_api}&units=metric").json()
     weather = res["weather"][0]["main"]
     temperature = res["main"]["temp"]
     feels_like = res["main"]["feels_like"]
